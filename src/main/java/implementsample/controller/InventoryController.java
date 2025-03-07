@@ -19,10 +19,33 @@ import saasus.sdk.auth.api.UserInfoApi;
 import saasus.sdk.auth.models.UserInfo;
 import saasus.sdk.modules.AuthApiClient;
 import saasus.sdk.modules.Configuration;
+import saasus.sdk.modules.SaaSusAPI;
 
 @RestController
 public class InventoryController {
     private static final Logger logger = Logger.getLogger(InventoryController.class.getName());
+
+    @SaaSusAPI(path = "getInventory")
+    public static List<InventoryItem> getInventoryEntryPoint(String apiKey) {
+
+        // APIキーからテナントIDを取得
+        String tenantId = "1cfd6af8-219c-4f64-8fe3-2e8973697bff";
+
+        // getInventoryDataServiceメソッドを呼び出し
+        InventoryController controller = new InventoryController();
+        List<InventoryController.InventoryItem> inventoryItems = controller.getInventoryDataService(tenantId);
+
+        // 結果を出力
+        if (inventoryItems != null && !inventoryItems.isEmpty()) {
+            for (InventoryController.InventoryItem item : inventoryItems) {
+                logger.log(Level.INFO, "ID: {0}, Name: {1}, Count: {2}",
+                        new Object[] { item.getId(), item.getName(), item.getCount() });
+            }
+        } else {
+            logger.log(Level.WARNING, "在庫データが見つかりませんでした。");
+        }
+        return inventoryItems;
+    }
 
     @GetMapping("/products")
     public List<InventoryItem> getInventory(@Context HttpServletRequest request) {
@@ -43,6 +66,12 @@ public class InventoryController {
 
         // テナントID取得
         String tenantId = userInfo.getTenants().get(0).getId();
+
+        // テナントIDに対応する在庫情報取得
+        return getInventoryDataService(tenantId);
+    }
+
+    public List<InventoryItem> getInventoryDataService(String tenantId) {
 
         // テナントIDに対応する在庫情報取得
         return TenantInventory.getOrDefault(tenantId, TenantInventory.get("default"));
