@@ -26,24 +26,27 @@ public class InventoryController {
     private static final Logger logger = Logger.getLogger(InventoryController.class.getName());
 
     @SaaSusAPI(path = "getInventory")
-    public static List<InventoryItem> getInventoryEntryPoint(String apiKey) {
+    public static List<InventoryItem> getInventoryEntryPoint(String xApiKey) {
+
+        // System.out.println("apiKey:" + apiKey);
 
         // APIキーからテナントIDを取得
-        String tenantId = "1cfd6af8-219c-4f64-8fe3-2e8973697bff";
+        TenantApiClient tenantClient = new Configuration().getTenantApiClient();
+        String tenantId = tenantClient.getTenantIdFromApiKey(xApiKey);
+        // String tenantId = "";
+        // if (apiKey.equals("tenant1")) {
+        // tenantId = "1cfd6af8-219c-4f64-8fe3-2e8973697bff";
+        // } else if (apiKey.equals("tenant2")) {
+        // tenantId = "aee54d7b-1819-484c-a584-fef85a64419e";
+        // } else {
+        // tenantId = "oh....";
+        // }
+        // System.out.println("tenantId:" + tenantId);
 
         // getInventoryDataServiceメソッドを呼び出し
         InventoryController controller = new InventoryController();
         List<InventoryController.InventoryItem> inventoryItems = controller.getInventoryDataService(tenantId);
 
-        // 結果を出力
-        if (inventoryItems != null && !inventoryItems.isEmpty()) {
-            for (InventoryController.InventoryItem item : inventoryItems) {
-                logger.log(Level.INFO, "ID: {0}, Name: {1}, Count: {2}",
-                        new Object[] { item.getId(), item.getName(), item.getCount() });
-            }
-        } else {
-            logger.log(Level.WARNING, "在庫データが見つかりませんでした。");
-        }
         return inventoryItems;
     }
 
