@@ -1,14 +1,16 @@
-# implementation-sample-api-java
+# implementation-sample-smart-api-gateway
 
-This is a SaaS implementation sample using the SaaSus SDK
+This is a Smart API Gateway implementation sample using the SaaSus SDK
 
-See the documentation [API implementation using SaaS Platform](https://docs.saasus.io/docs/implementing-authentication-using-saasus-platform-apiserver)
+See the documentation [Smart API Gateway Feature](https://docs.saasus.io/docs/api-gateway-function/overview)
 
 ## Requirements
+
 - docker
 - maven (latest)
 
 ## Setup SDK
+
 ```sh
 # Run in any directory
 git clone git@github.com:saasus-platform/saasus-sdk-java.git
@@ -18,12 +20,15 @@ mvn install:install-file -Dfile=target/saasus-sdk-java-1.0.0.jar -DgroupId=io.sa
 ```
 
 ## Run Java API
+
 ```sh
 # Run in any directory
-git clone git@github.com:saasus-platform/implementation-sample-api-java
-cd implementation-sample-api-java
+git clone git@github.com:saasus-platform/implementation-sample-smart-api-gateway.git
+cd implementation-sample-smart-api-gateway
 mvn clean package
+```
 
+```
 cp .env.example .env
 vi .env
 

@@ -19,8 +19,6 @@ public class ApiServerListener implements ServletContextListener {
             ApiServer.start(8083);
             System.out.println("SaaSus API Server started on port 8083");
             System.out.println("Available endpoints:");
-            System.out
-                    .println("GET http://localhost:8083/implementsample.controller.InventoryController$InventoryItem");
         } catch (Exception e) {
             System.err.println("Failed to start SaaSus API Server: " + e.getMessage());
             e.printStackTrace();

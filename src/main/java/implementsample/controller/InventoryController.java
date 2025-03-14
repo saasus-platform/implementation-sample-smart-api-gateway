@@ -41,17 +41,4 @@ public class InventoryController {
         InventoryService inventoryService = new InventoryService();
         return inventoryService.getInventory(tenantId);
     }
-
-    // @SaaSusAPI(path = "getInventory")
-    // public static List<InventoryDto> getInventoryEntryPoint(String xApiKey) {
-    // // APIキーからテナントIDを取得
-    // TenantApiClient tenantClient = new TenantApiClient();
-    // String tenantId = tenantClient.getTenantIdFromApiKey(xApiKey);
-
-    // // getInventoryDataServiceメソッドを呼び出し
-    // InventoryService inventoryService = new InventoryService();
-    // List<InventoryDto> inventoryItems = inventoryService.getInventory(tenantId);
-
-    // return inventoryItems;
-    // }
 }
