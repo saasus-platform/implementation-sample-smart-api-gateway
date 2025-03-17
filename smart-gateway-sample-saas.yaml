@@ -644,6 +644,11 @@ Resources:
                 - echo "Docker installed. Checking configuration"
                 - docker --version
                 - systemctl status docker.service
+                - echo "Installing Docker Compose (standalone binary)"
+                - sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+                - sudo chmod +x /usr/local/bin/docker-compose
+                - echo "Docker Compose installed. Checking configuration"
+                - docker-compose version
           - action: aws:runShellScript
             name: InstallDockerApt
             precondition:
@@ -785,6 +790,7 @@ Resources:
               runCommand:
                 - "#!/bin/bash"
                 - dnf install -y java-1.8.0-amazon-corretto java-1.8.0-amazon-corretto-devel maven
+                - update-alternatives --set java /usr/lib/jvm/java-1.8.0-amazon-corretto.x86_64/jre/bin/java
                 - !Sub echo 'export JAVA_1_8_HOME=$(dirname $(dirname $(readlink -f $(which java))))' >> /home/${VSCodeUser}/.bashrc
                 - !Sub echo 'export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))' >> /home/${VSCodeUser}/.bashrc
                 - !Sub echo 'export PATH=$PATH:$JAVA_HOME/bin:/usr/share/maven/bin' >> /home/${VSCodeUser}/.bashrc
