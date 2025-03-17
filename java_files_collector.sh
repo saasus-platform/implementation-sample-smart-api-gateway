@@ -3,7 +3,7 @@
 # Usage: $0 <directory>
 
 DIRECTORY=$1
-OUTPUT_FILE="generated_file_name.txt"
+OUTPUT_FILE="java_files_merged.txt"
 
 if [ -f "$OUTPUT_FILE" ]; then
     rm "$OUTPUT_FILE"
@@ -15,7 +15,7 @@ find "$DIRECTORY" -type f -name "*.java" -print0 | while IFS= read -r -d '' file
     echo -e "\n" >>"$OUTPUT_FILE"
 done
 
-ZIP_FILE="generated_file_name.zip"
+ZIP_FILE="java_files_archive.zip"
 if [ -f "$ZIP_FILE" ]; then
     rm "$ZIP_FILE"
 fi

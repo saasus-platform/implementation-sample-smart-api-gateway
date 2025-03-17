@@ -2,10 +2,10 @@ package implementsample.service;
 
 import java.util.List;
 
+import implementsample.dto.InventoryDto;
 import implementsample.repository.InventoryRepository;
 import implementsample.util.TenantApiClient;
 import saasus.sdk.modules.SaaSusAPI;
-import implementsample.dto.InventoryDto;
 
 public class InventoryService {
     public List<InventoryDto> getInventory(String tenantId) {
@@ -14,6 +14,7 @@ public class InventoryService {
                 InventoryRepository.TenantInventory.get("default"));
     }
 
+    // Step 2: ソースコードへのアノテーション設定
     @SaaSusAPI(path = "getInventory")
     public static List<InventoryDto> getInventoryEntryPoint(String xApiKey) {
         // APIキーからテナントIDを取得

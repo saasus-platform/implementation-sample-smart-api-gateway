@@ -44,14 +44,22 @@
       <version>5.3.10</version>
     </dependency>
     <dependency>
+      <groupId>javax.ws.rs</groupId>
+      <artifactId>javax.ws.rs-api</artifactId>
+      <version>2.1.1</version>
+    </dependency>
+    <!-- saasus platform sdk -->
+    <dependency>
       <groupId>io.saasus</groupId>
       <artifactId>saasus-java</artifactId>
       <version>0.0.1</version>
     </dependency>
+    <!-- saasus platform sdk -->
   </dependencies>
   <build>
     <finalName>ROOT</finalName>
   </build>
+  <!-- smart api gateway parameter setting -->
   <profiles>
     <profile>
       <id>with-parameters</id>
@@ -71,4 +79,5 @@
       </build>
     </profile>
   </profiles>
+  <!-- smart api gateway parameter setting -->
 </project>

@@ -4,6 +4,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+// API Server の起動設定
 import saasus.sdk.util.apiserver.ApiServer;
 
 /**
@@ -16,6 +17,7 @@ public class ApiServerListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         try {
+            // API Server の起動設定
             ApiServer.start(8083);
             System.out.println("SaaSus API Server started on port 8083");
             System.out.println("Available endpoints:");
