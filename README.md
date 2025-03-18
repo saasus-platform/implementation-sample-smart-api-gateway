@@ -42,5 +42,7 @@ SAASUS_SECRET_KEY="xxxxxxxxxx"
 ```
 
 ```
+docker-compose up -d
+または
 docker compose up -d
 ```
