@@ -2,7 +2,7 @@ package implementsample.util;
 
 // ダミーのクラス
 public class TenantApiClient {
-    public String getTenantIdFromApiKey(String xApiKey) {
-        return xApiKey;
+    public String getTenantIdFromInventoryId(String inventoryId) {
+        return inventoryId;
     }
 }
