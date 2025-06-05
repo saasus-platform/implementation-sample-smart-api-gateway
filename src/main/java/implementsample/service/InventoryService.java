@@ -17,7 +17,7 @@ public class InventoryService {
     // Step 2: ソースコードへのアノテーション設定
     @SaaSusAPI(path = "getInventory")
     public static List<InventoryDto> getInventoryEntryPoint(String inventoryId) {
-        // APIキーからテナントIDを取得
+
         TenantApiClient tenantClient = new TenantApiClient();
         String tenantId = tenantClient.getTenantIdFromApiKey(inventoryId);
 
