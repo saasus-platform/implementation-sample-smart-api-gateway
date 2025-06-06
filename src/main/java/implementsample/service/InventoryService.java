@@ -19,7 +19,7 @@ public class InventoryService {
     public static List<InventoryDto> getInventoryEntryPoint(String inventoryId) {
 
         TenantApiClient tenantClient = new TenantApiClient();
-        String tenantId = tenantClient.getTenantIdFromApiKey(inventoryId);
+        String tenantId = tenantClient.getTenantIdFromInventoryId(inventoryId);
 
         return InventoryRepository.TenantInventory.getOrDefault(tenantId,
                 InventoryRepository.TenantInventory.get("default"));
