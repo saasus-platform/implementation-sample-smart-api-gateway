@@ -4,24 +4,35 @@ import java.util.List;
 
 import implementsample.dto.InventoryDto;
 import implementsample.repository.InventoryRepository;
-import implementsample.util.TenantApiClient;
 import saasus.sdk.modules.SaaSusAPI;
+import saasus.sdk.util.apiserver.SaaSusIdentity;
 
 public class InventoryService {
-    public List<InventoryDto> getInventory(String tenantId) {
-        // テナントIDに対応する在庫情報取得
-        return InventoryRepository.TenantInventory.getOrDefault(tenantId,
-                InventoryRepository.TenantInventory.get("default"));
+
+    /**
+     * 在庫情報を取得するAPI
+     * @param identity SaaSusIdentity オブジェクト
+     * @return 在庫情報のリスト
+     */
+    @SaaSusAPI(path = "getInventory")
+    public static List<InventoryDto> getInventory(SaaSusIdentity identity) {
+        String tenantId = identity.getTenantId();
+        String envId = identity.getEnvId();
+
+        return InventoryRepository.getInventory(tenantId, envId);
     }
 
-    // Step 2: ソースコードへのアノテーション設定
-    @SaaSusAPI(path = "getInventory")
-    public static List<InventoryDto> getInventoryEntryPoint(String inventoryId) {
+    /**
+     * ユーザごとの在庫情報を取得するAPI
+     * @param identity SaaSusIdentity オブジェクト
+     * @return 在庫情報のリスト
+     */
+    @SaaSusAPI(path = "getInventoryByUser")
+    public static List<InventoryDto> getInventoryByUser(SaaSusIdentity identity) {
+        String tenantId = identity.getTenantId();
+        String envId = identity.getEnvId();
+        String userId = identity.getUserId();
 
-        TenantApiClient tenantClient = new TenantApiClient();
-        String tenantId = tenantClient.getTenantIdFromInventoryId(inventoryId);
-
-        return InventoryRepository.TenantInventory.getOrDefault(tenantId,
-                InventoryRepository.TenantInventory.get("default"));
+        return InventoryRepository.getInventoryByUser(tenantId, envId, userId);
     }
 }
