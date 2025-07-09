@@ -11,6 +11,5 @@ public class InventoryDto {
     private String id;
     private String name;
     private int count;
-    private String envId;
-    private String purchaserId;
+    private String adminId;
 }
